@@ -55,6 +55,7 @@ const rpsGamePlay = async () => {
 
     const setPlayerMove = async () => {
         player1.move = await rl.question('Enter your move (rock, paper, scissors): ');
+        player1.move = player1.move.toLowerCase();
         while (player1.move !== 'rock' && player1.move !== 'paper' && player1.move !== 'scissors') {
             console.log('Invalid move. Please enter rock, paper, or scissors.');
             player1.move = await rl.question('Enter your move (rock, paper, scissors): ');
@@ -83,7 +84,6 @@ const rpsGamePlay = async () => {
             await setPlayerMove();
             player2.move = moveSet[Math.floor(Math.random() * moveSet.length)];
             console.log(rpsLogic(player1, player2));
-            console.log(rpsGamePlay(player1, player2));
             await setPlaying();
         }
     }
