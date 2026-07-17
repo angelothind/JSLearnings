@@ -11,6 +11,42 @@ const {stdin: input, stdout: output} = require('process');
 
 const rl = readline.createInterface({ input, output });
 
+const fetchUser = async (id) => {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+    const data = await response.json();
+    return data;
+}
+
+const fetchAllUserTasks = async (id) => {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos?userId=${id}`);
+    const data = await response.json();
+    return data;
+}
+
+const fetchUserCompletedTasks = async (id) => {
+    const response = await fetchAllUserTasks(id);
+    const completedTasks = response.filter(task => task.completed === true);
+    return completedTasks;
+}
+
+const fetchUserIncompleteTasks = async (id) => {
+    const response = await fetchAllUserTasks(id);
+    const incompleteTasks = response.filter(task => task.completed === false);
+    return incompleteTasks;
+}
+
+const fetchUserCompletedTasksIds = async (id) => {
+    const response = await fetchUserCompletedTasks(id);
+    const completedTasksIds = response.map(task => task.id);
+    return completedTasksIds;
+}
+
+const fetchUserIncompleteTasksIds = async (id) => {
+    const response = await fetchUserIncompleteTasks(id);
+    const incompleteTasksIds = response.map(task => task.id);
+    return incompleteTasksIds;
+}
+
 const explorer = async () => {
     
     output.write('=== Task Explorer === \n');
@@ -22,11 +58,6 @@ const explorer = async () => {
         return;
     }
 
-    const fetchUser = async (id) => {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-        const data = await response.json();
-        return data;
-    }
 
 
 

@@ -57,7 +57,9 @@ What would you like to view?
 2. Incomplete tasks
 3. All tasks
 4. Choose another user
-5. Exit
+6. Get only Id of completed tasks
+7. Get only Id of completed tasks
+8. Exit
 
 > 2
 ```
