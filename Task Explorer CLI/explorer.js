@@ -9,7 +9,7 @@
 const readline = require('readline/promises');
 const {stdin: input, stdout: output} = require('process');
 
-const rl = readline.createInterface({ input, output });
+
 
 const fetchUser = async (id) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
@@ -67,6 +67,7 @@ const disaplaySummary = async (id) => {
 
 
 const explorer = async () => {
+    const rl = readline.createInterface({ input, output });
     let running = true;
 
     output.write('=== Task Explorer === \n');
@@ -139,6 +140,17 @@ const explorer = async () => {
     rl.close();
 }
 
-explorer();
 
-module.exports = { explorer, fetchUser, fetchAllUserTasks, fetchUserCompletedTasks, fetchUserIncompleteTasks, fetchUserCompletedTasksIds, fetchUserIncompleteTasksIds };
+if (require.main === module) {
+    explorer();
+}
+
+module.exports = {
+    explorer,
+    fetchUser,
+    fetchAllUserTasks,
+    fetchUserCompletedTasks,
+    fetchUserIncompleteTasks,
+    fetchUserCompletedTasksIds,
+    fetchUserIncompleteTasksIds
+};
