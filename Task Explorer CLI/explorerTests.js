@@ -17,6 +17,6 @@ test("fetchUser", async () => {
 test("fetchAllUserTasks", async () => {
     const userID = 1;
     const allTasks = await fetchAllUserTasks(userID);
-    assert.equal(allTasks.length, 10);
+    assert.equal(allTasks.length, 20);
 });
 
