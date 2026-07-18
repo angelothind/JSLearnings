@@ -140,3 +140,5 @@ const explorer = async () => {
 }
 
 explorer();
+
+module.exports = { explorer, fetchUser, fetchAllUserTasks, fetchUserCompletedTasks, fetchUserIncompleteTasks, fetchUserCompletedTasksIds, fetchUserIncompleteTasksIds };
