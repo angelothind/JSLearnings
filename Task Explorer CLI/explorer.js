@@ -66,73 +66,77 @@ const disaplaySummary = async (id) => {
 }
 
 
-const explorer = async (changingUser = false) => {
-    let userID;
-    if (changingUser === false) {
-        output.write('=== Task Explorer === \n');
-        output.write('\n');
+const explorer = async () => {
+    let running = true;
+
+    output.write('=== Task Explorer === \n');
+    output.write('\n');
+
+    while (running) {
         output.write('Enter a user ID from 1–10, or type "exit": \n');
-        userID = await rl.question('> ');
+        const userID = await rl.question('> ');
+
         if (userID === 'exit') {
-            rl.close();
-            return;
-        }
-    }
-    else {
-        output.write('\n');
-        output.write('Enter a user ID from 1–10, or type "exit": \n');
-        userID = await rl.question('> ');
-    }
-
-    
-
-    await disaplaySummary(userID);
-
-    output.write('What would you like to view? \n');
-    output.write('1. Completed tasks \n');
-    output.write('2. Incomplete tasks \n');
-    output.write('3. All tasks \n');
-    output.write('4. Choose another user \n');
-    output.write('6. Get only Id of completed tasks \n');
-    output.write('7. Get only Id of incomplete tasks \n');
-    output.write('8. Exit \n');
-
-    let choice = await rl.question('> ');
-    while (choice !== '8') {
-        switch (choice) {
-            case '1':
-                const completedTasks = await fetchUserCompletedTasks(userID);
-                console.log(completedTasks.map(task => task.title));
-                break;
-            case '2':
-                const incompleteTasks = await fetchUserIncompleteTasks(userID);
-                console.log(incompleteTasks.map(task => task.title));
-                break;
-            case '3':
-                const allTasks = await fetchAllUserTasks(userID);
-                console.log(allTasks.map(task => task.title));
-                break;
-            case '4':
-                await explorer();
-                break;
-            case '6':
-                const completedTasksIds = await fetchUserCompletedTasksIds(userID);
-                console.log(completedTasksIds.map(task => task.id));
-                break;
-            case '7':
-                const incompleteTasksIds = await fetchUserIncompleteTasksIds(userID);
-                console.log(incompleteTasksIds.map(task => task.id));
-                break;    
-            default:
-                output.write('Invalid choice. Please try again. \n');
-                await explorer();   
+            break;
         }
 
-        choice = 8;
-        
+        await disaplaySummary(userID);
+
+        let viewingUser = true;
+
+        while (viewingUser && running) {
+            output.write('What would you like to view? \n');
+            output.write('1. Completed tasks \n');
+            output.write('2. Incomplete tasks \n');
+            output.write('3. All tasks \n');
+            output.write('4. Choose another user \n');
+            output.write('6. Get only Id of completed tasks \n');
+            output.write('7. Get only Id of incomplete tasks \n');
+            output.write('8. Exit \n');
+
+            const choice = await rl.question('> ');
+
+            switch (choice) {
+                case '1': {
+                    const completedTasks = await fetchUserCompletedTasks(userID);
+                    console.log(completedTasks.map(task => task.title));
+                    break;
+                }
+                case '2': {
+                    const incompleteTasks = await fetchUserIncompleteTasks(userID);
+                    console.log(incompleteTasks.map(task => task.title));
+                    break;
+                }
+                case '3': {
+                    const allTasks = await fetchAllUserTasks(userID);
+                    console.log(allTasks.map(task => task.title));
+                    break;
+                }
+                case '4':
+                    viewingUser = false;
+                    break;
+                case '6': {
+                    const completedTasksIds = await fetchUserCompletedTasksIds(userID);
+                    console.log(completedTasksIds);
+                    break;
+                }
+                case '7': {
+                    const incompleteTasksIds = await fetchUserIncompleteTasksIds(userID);
+                    console.log(incompleteTasksIds);
+                    break;
+                }
+                case '8':
+                    running = false;
+                    break;
+                default:
+                    output.write('Invalid choice. Please try again. \n');
+            }
+
+            output.write('\n');
+        }
     }
+
     rl.close();
-    return;
 }
 
 explorer();
