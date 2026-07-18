@@ -13,39 +13,49 @@ const {stdin: input, stdout: output} = require('process');
 
 const fetchUser = async (id) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch user data: ${response.status} ${response.statusText}`);
+    }
+
     const data = await response.json();
     return data;
-}
+};
 
 const fetchAllUserTasks = async (id) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/todos?userId=${id}`);
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch all user tasks: ${response.status} ${response.statusText}`);
+    }
+
     const data = await response.json();
     return data;
-}
+};
 
 const fetchUserCompletedTasks = async (id) => {
     const response = await fetchAllUserTasks(id);
     const completedTasks = response.filter(task => task.completed === true);
     return completedTasks;
-}
+};
 
 const fetchUserIncompleteTasks = async (id) => {
     const response = await fetchAllUserTasks(id);
     const incompleteTasks = response.filter(task => task.completed === false);
     return incompleteTasks;
-}
+};
 
 const fetchUserCompletedTasksIds = async (id) => {
     const response = await fetchUserCompletedTasks(id);
     const completedTasksIds = response.map(task => task.id);
     return completedTasksIds;
-}
+};
 
 const fetchUserIncompleteTasksIds = async (id) => {
     const response = await fetchUserIncompleteTasks(id);
     const incompleteTasksIds = response.map(task => task.id);
     return incompleteTasksIds;
-}
+};
 
 const disaplaySummary = async (id) => {
     //promise.all([fetchUser(id), fetchAllUserTasks(id), 
