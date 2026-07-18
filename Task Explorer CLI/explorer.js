@@ -47,6 +47,25 @@ const fetchUserIncompleteTasksIds = async (id) => {
     return incompleteTasksIds;
 }
 
+const disaplaySummary = async (id) => {
+    const userData = await fetchUser(id);
+    const {name, email} = userData;
+    output.write(`User: ${name} \n`);
+    output.write(`Email: ${email} \n`);
+    output.write(`\n`);
+    const allTasks = await fetchAllUserTasks(id);
+    const numberOfTasks = allTasks.length;
+    const completedTasks = await fetchUserCompletedTasks(id);
+    const numberOfCompletedTasks = completedTasks.length;
+    const incompleteTasks = await fetchUserIncompleteTasks(id);
+    const numberOfIncompleteTasks = incompleteTasks.length;
+    output.write(`Number of Tasks: ${numberOfTasks} \n`);
+    output.write(`Number of Completed Tasks: ${numberOfCompletedTasks} \n`);
+    output.write(`Number of Incomplete Tasks: ${numberOfIncompleteTasks} \n`);
+    output.write(`\n`);
+}
+
+
 const explorer = async () => {
     
     output.write('=== Task Explorer === \n');
@@ -58,7 +77,7 @@ const explorer = async () => {
         return;
     }
 
-
+    await disaplaySummary(userID);
 
 
     
