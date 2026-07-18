@@ -48,6 +48,10 @@ const fetchUserIncompleteTasksIds = async (id) => {
 }
 
 const disaplaySummary = async (id) => {
+    //promise.all([fetchUser(id), fetchAllUserTasks(id), 
+    // fetchUserCompletedTasks(id), fetchUserIncompleteTasks(id)])
+    // = ([])
+
     const userData = await fetchUser(id);
     const {name, email} = userData;
     output.write(`User: ${name} \n`);
@@ -59,6 +63,21 @@ const disaplaySummary = async (id) => {
     const numberOfCompletedTasks = completedTasks.length;
     const incompleteTasks = await fetchUserIncompleteTasks(id);
     const numberOfIncompleteTasks = incompleteTasks.length;
+    output.write(`Number of Tasks: ${numberOfTasks} \n`);
+    output.write(`Number of Completed Tasks: ${numberOfCompletedTasks} \n`);
+    output.write(`Number of Incomplete Tasks: ${numberOfIncompleteTasks} \n`);
+    output.write(`\n`);
+}
+
+const disaplaySummaryConcurent = async (id) => {
+    const [user, tasks, completedTasks, incompleteTasks] = await Promise.all([fetchUser(id), fetchAllUserTasks(id), fetchUserCompletedTasks(id), fetchUserIncompleteTasks(id)]);
+    const {name, email} = user;
+    const numberOfTasks = tasks.length;
+    const numberOfCompletedTasks = completedTasks.length;
+    const numberOfIncompleteTasks = incompleteTasks.length;
+    output.write(`User: ${name} \n`);
+    output.write(`Email: ${email} \n`);
+    output.write(`\n`);
     output.write(`Number of Tasks: ${numberOfTasks} \n`);
     output.write(`Number of Completed Tasks: ${numberOfCompletedTasks} \n`);
     output.write(`Number of Incomplete Tasks: ${numberOfIncompleteTasks} \n`);
@@ -81,7 +100,7 @@ const explorer = async () => {
             break;
         }
 
-        await disaplaySummary(userID);
+        await disaplaySummaryConcurent(userID);
 
         let viewingUser = true;
 
@@ -141,12 +160,15 @@ const explorer = async () => {
 }
 
 
+
 if (require.main === module) {
     explorer();
 }
 
 module.exports = {
     explorer,
+    disaplaySummary,
+    disaplaySummaryConcurent,
     fetchUser,
     fetchAllUserTasks,
     fetchUserCompletedTasks,
