@@ -120,3 +120,9 @@ export const products = [
     image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=300&fit=crop",
   },
 ];
+
+export const state = {
+  basket: [],
+  searchTerm: "",
+  selectedCategory: "all"
+};

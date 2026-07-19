@@ -1,5 +1,7 @@
 import { products } from "./products.js";
 
+import { state } from "./products.js";
+
 const productList = document.getElementById("product-table");
 
 function renderProducts(products) {
@@ -29,4 +31,30 @@ function renderProducts(products) {
     `).join("");
 }
 
+function handleAddToCart(event) {
+    // currentTarget is the button whose click listener called this function.
+    // dataset.id reads data-id as a string, so Number() converts it to a number.
+    const productId = Number(event.currentTarget.dataset.id);
+
+    // find() checks each product until its ID matches the clicked button's ID.
+    const selectedProduct = products.find(
+        (product) => product.id === productId
+    );
+
+    // This can later be replaced with the shopping-basket logic.
+    console.log(selectedProduct);
+}
+
+function setupProductButtons() {
+    // renderProducts() creates these buttons before this function runs.
+    const buttons = productList.querySelectorAll(".product-button");
+
+    // Give every product button the same click handler.
+    buttons.forEach((button) => {
+        button.addEventListener("click", handleAddToCart);
+    });
+}
+
 renderProducts(products);
+setupProductButtons();
+
