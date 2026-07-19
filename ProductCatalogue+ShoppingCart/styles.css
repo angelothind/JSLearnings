@@ -1,0 +1,30 @@
+.product-button-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.product-button:hover {
+    background-color: #dddddd;
+}
+
+.product-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    z-index: 1;
+    width: max-content;
+    padding: 5px 8px;
+    border-radius: 4px;
+    background-color: #222222;
+    color: #ffffff;
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%);
+    transition: opacity 0.15s;
+}
+
+.product-button-wrapper:hover .product-tooltip,
+.product-button:focus-visible + .product-tooltip {
+    opacity: 1;
+}

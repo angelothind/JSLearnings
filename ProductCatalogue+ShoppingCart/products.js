@@ -5,6 +5,7 @@ export const products = [
     price: 49.99,
     category: "Technology",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=300&fit=crop",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const products = [
     price: 24.99,
     category: "Technology",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop",
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const products = [
     price: 39.5,
     category: "Technology",
     inStock: false,
+    image: "https://images.unsplash.com/photo-1625948515291-69613efd103f?w=400&h=300&fit=crop",
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ export const products = [
     price: 32.0,
     category: "Home",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=300&fit=crop",
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ export const products = [
     price: 12.99,
     category: "Home",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&h=300&fit=crop",
   },
   {
     id: 6,
@@ -40,6 +45,7 @@ export const products = [
     price: 9.5,
     category: "Stationery",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400&h=300&fit=crop",
   },
   {
     id: 7,
@@ -47,6 +53,7 @@ export const products = [
     price: 18.75,
     category: "Stationery",
     inStock: false,
+    image: "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=400&h=300&fit=crop",
   },
   {
     id: 8,
@@ -54,6 +61,7 @@ export const products = [
     price: 79.99,
     category: "Clothing",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
   },
   {
     id: 9,
@@ -61,6 +69,7 @@ export const products = [
     price: 45.0,
     category: "Clothing",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=300&fit=crop",
   },
   {
     id: 10,
@@ -68,6 +77,7 @@ export const products = [
     price: 59.99,
     category: "Technology",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop",
   },
   {
     id: 11,
@@ -75,6 +85,7 @@ export const products = [
     price: 69.0,
     category: "Technology",
     inStock: false,
+    image: "https://images.unsplash.com/photo-1587826080692-f439cd0b70da?w=400&h=300&fit=crop",
   },
   {
     id: 12,
@@ -82,6 +93,7 @@ export const products = [
     price: 22.5,
     category: "Home",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400&h=300&fit=crop",
   },
   {
     id: 13,
@@ -89,6 +101,7 @@ export const products = [
     price: 27.99,
     category: "Home",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=400&h=300&fit=crop",
   },
   {
     id: 14,
@@ -96,6 +109,7 @@ export const products = [
     price: 6.49,
     category: "Stationery",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=400&h=300&fit=crop",
   },
   {
     id: 15,
@@ -103,5 +117,6 @@ export const products = [
     price: 19.99,
     category: "Clothing",
     inStock: true,
+    image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=300&fit=crop",
   },
 ];
