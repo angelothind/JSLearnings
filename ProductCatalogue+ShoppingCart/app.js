@@ -54,8 +54,26 @@ function renderBasket(state) {
 }
 
 
+function handleAddToBasket(event) {
+    const productId = Number(event.currentTarget.dataset.id);
+    const selectedProduct = products.find(product => product.id === productId);
+    if (selectedProduct.inStock) {
+        state.basket.push({productId: productId, quantity: 1});
+        renderBasket(state);
+    } else {
+        console.log("Product is out of stock");
+    }
+}
+
+function addToBasketListener() {
+    const addToBasketButtons = productList.querySelectorAll(".product-button");
+    addToBasketButtons.forEach(button => {
+        button.addEventListener("click", (event) => handleAddToBasket(event));
+    });
+}
 
 
 renderProducts(products);
 renderBasket(state);
+addToBasketListener(products);
 
