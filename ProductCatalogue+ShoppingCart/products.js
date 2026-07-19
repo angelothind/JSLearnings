@@ -122,6 +122,7 @@ export const products = [
 ];
 
 export const state = {
+  userName: "John Doe",
   basket: [],
   searchTerm: "",
   selectedCategory: "all"

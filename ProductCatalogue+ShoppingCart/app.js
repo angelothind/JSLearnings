@@ -3,6 +3,12 @@ import { products } from "./products.js";
 import { state } from "./products.js";
 
 const productList = document.getElementById("product-table");
+const shoppingBasket = document.getElementById("shopping-basket-container");
+const personalPageTitle = document.getElementById("personal-page-title");
+const personalPageHeader = document.getElementById("personal-page-header");
+
+personalPageTitle.innerHTML = `Welcome, ${state.userName}!`;
+personalPageHeader.innerHTML = `Welcome, ${state.userName}!`;
 
 function renderProducts(products) {
     productList.innerHTML = products.map(product => `
@@ -31,30 +37,25 @@ function renderProducts(products) {
     `).join("");
 }
 
-function handleAddToCart(event) {
-    // currentTarget is the button whose click listener called this function.
-    // dataset.id reads data-id as a string, so Number() converts it to a number.
-    const productId = Number(event.currentTarget.dataset.id);
-
-    // find() checks each product until its ID matches the clicked button's ID.
-    const selectedProduct = products.find(
-        (product) => product.id === productId
-    );
-
-    // This can later be replaced with the shopping-basket logic.
-    console.log(selectedProduct);
+function renderBasket(state) {
+    if (state.basket.length === 0) {
+        shoppingBasket.innerHTML = "<p>Your basket is empty</p>";
+    } else {
+        shoppingBasket.innerHTML = state.basket.map(cartItem => {
+            const itemInformation = products.find(product => product.id === cartItem.productId);
+            return `<tr>
+                <td>${cartItem.quantity}</td>
+                <td>${itemInformation.name}</td>
+                <td>£${itemInformation.price.toFixed(2)}</td>
+                <td>£${(itemInformation.price * cartItem.quantity).toFixed(2)}</td>
+            </tr>`
+        }).join("");
+    }
 }
 
-function setupProductButtons() {
-    // renderProducts() creates these buttons before this function runs.
-    const buttons = productList.querySelectorAll(".product-button");
 
-    // Give every product button the same click handler.
-    buttons.forEach((button) => {
-        button.addEventListener("click", handleAddToCart);
-    });
-}
+
 
 renderProducts(products);
-setupProductButtons();
+renderBasket(state);
 
